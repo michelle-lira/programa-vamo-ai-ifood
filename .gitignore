@@ -109,6 +109,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+venv-aula12
+requirements.txt
 
 # Spyder project settings
 .spyderproject
