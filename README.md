@@ -56,5 +56,9 @@ Sejam bem-vindos!
 ### Compartilharei aqui um pouco da minha jornada de estudos.
 ### Preparado(a)? Então VamoAI! 📚
 
+---
 
+# Projetos
+### Módulo 1: ![Jogo Mortal Queen](https://github.com/michelle-lira/jogoResilia)
+### Módulo 2: ![Consumindo a API Marvel](https://github.com/michelle-lira/API_Marvel)
 
