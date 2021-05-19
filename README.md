@@ -44,17 +44,18 @@ Sejam bem-vindos!
 ---
 
 
-# #MomCode 😍
+# E após todas as etapas da seleção: #MomCode 😍 \o/
 
 
 ![](https://github.com/michelle-lira/exercicios-projeto-vamo-ai/blob/main/images/aprovacao_vamo_ai.png)
 
-### Dando start em uma jornada, que desejo, longa e produtiva. Que uma mulher traga mais uma! 🚀
+Junto com mais 34 aprovados, formamos uma turma colaborativa e acolhedora.
+Dando start em uma jornada, que desejo, longa e produtiva. Que uma mulher traga mais uma! 🚀
 
 ![](https://github.com/michelle-lira/exercicios-projeto-vamo-ai/blob/main/images/unnamed.gif)
 
-### Compartilharei aqui um pouco da minha jornada de estudos.
-### Preparado(a)? Então VamoAI! 📚
+Compartilharei aqui um pouco da minha jornada de estudos.
+Preparado(a)? Então VamoAI! 📚
 
 ---
 
