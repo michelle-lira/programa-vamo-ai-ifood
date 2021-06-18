@@ -1,0 +1,649 @@
+************************************************
+***  CURSO INTRODUÇÃO AO POSTGRESQL - ALURA  ***
+************************************************
+
+-- drop database postgres;
+
+create database postgres
+    with 
+    owner = postgres
+    encoding = 'UTF8'
+    lc_collate = 'en_US.utf8'
+    lc_ctype = 'en_US.utf8'
+    tablespace = pg_default
+    connection limit = -1;
+
+comment on database postgres
+    IS 'default administrative connection database';
+
+
+-- apenas para checar se o banco está conectado
+ select now()
+ 
+-- tipos de caracteres mais usados
+ integer -- qtd de caracteres vai de -2 milhões a 2 milhões
+ serial -- tem autoincremento, tbm é inteiro, apenas números positivos
+ numeric -- podemos definir a precisão (qtd de casas decimais)
+ varchar -- texto, até x caracteres, mas pode variar
+ char -- qtd de caracteres fixa (se for menor, ele completa com zeros)
+ text -- quando não temos certeza do tamanho do texto
+ boolean -- pode aceitar true, false ou null (não inserir nada)
+ date 
+ time
+ timestamp -- data e hora (yyyy-mm-dd hh24:mi:ss)
+ 
+-- criando tabelas
+ create table aluno (
+ 	id serial not null,   -- se eu não especificasse o not null, poderia nem incluir os dados pra ele, que geraria automaticamente
+	nome varchar(255) not null,
+	cpf char(11) not null,
+	observacao text not null,
+	idade int not null,
+	dinheiro numeric(10,2) not null,
+	altura real not null,
+	ativo boolean not null,
+	data_de_nascimento date not null,
+	hora_da_aula time not null,
+	data_matricula timestamp not null
+ );
+
+-- inserindo dados na tabela
+insert into aluno (
+	id, 
+	nome, 
+	cpf, 
+	observacao, 
+	idade, 
+	dinheiro, 
+	altura, 
+	ativo, 
+	data_de_nascimento, 
+	hora_da_aula, 
+	data_matricula
+)
+values (
+	1, 
+	'Luan', 
+	'12345678912', 
+	'Alérgico a poeira, pólen e castanha. Adora comer frutas e não bebe refrigerante.', 
+	10, 
+	38745000.00, 
+	1.40, 
+	true, 
+	'2020-11-10', 
+	'08:15:00', 
+	'2020-12-05 13:27:30');
+-- é boa prática inserir os nomes das colunas que receberão os valores.
+-- a ordem dos valores na tabela vai seguir a ordem que colocarmos para as colunas.
+-- ou seja, se colocarmos fora de ordem, teremos que lembrar e distribuir os valores na mesma 
+-- sequência. Se não declararmos as colunas, o sistema atribui os valores na ordem padrão automaticamente.
+
+insert into aluno (
+	id, 
+	nome, 
+	cpf, 
+	observacao, 
+	idade, 
+	dinheiro, 
+	altura, 
+	ativo, 
+	data_de_nascimento, 
+	hora_da_aula, 
+	data_matricula
+)
+values (
+	2, 
+	'Diogo', 
+	'12345678922', 
+	'Tem muita preguiça no período da manhã.', 
+	16, 
+	5781.00, 
+	1.75, 
+	true, 
+	'2004-03-14', 
+	'08:15:00', 
+	'2020-12-16 09:00:00');
+	
+insert into aluno (
+	id, 
+	nome, 
+	cpf, 
+	observacao, 
+	idade, 
+	dinheiro, 
+	altura, 
+	ativo, 
+	data_de_nascimento, 
+	hora_da_aula, 
+	data_matricula
+)
+values (
+	3, 
+	'Diego', 
+	'12345678038', 
+	'Acumulou duas suspensões neste semestre', 
+	27, 
+	38745000.00, 
+	1.81, 
+	true, 
+	'1993-07-18', 
+	'08:15:00', 
+	'2020-12-05 13:27:30');
+	
+select * 
+  from aluno
+ where id = 1;
+ 	
+insert into aluno (
+	id, 
+	nome, 
+	cpf, 
+	observacao, 
+	idade, 
+	dinheiro, 
+	altura, 
+	ativo, 
+	data_de_nascimento, 
+	hora_da_aula, 
+	data_matricula
+)
+values (
+	4, 
+	'Nico Steppathh', 
+	'12345678912', 
+	'Alérgico a poeira, pólen e castanha. Adora comer frutas e não bebe refrigerante.', 
+	10, 
+	38745000.00, 
+	1.40, 
+	true, 
+	'2020-11-10', 
+	'08:15:00', 
+	'2020-12-05 13:27:30');
+	
+-- atualiza registros na tabela
+update aluno
+	set nome = 'Nico Steppat',
+	cpf = '12345678912',
+	observacao = 'We are the champions my friend',
+	idade = 38,
+	dinheiro = 38745000.00,
+	altura = 1.90,
+	ativo = false,
+	data_de_nascimento = '1980-01-15',
+	hora_da_aula = '13:00:00',
+	data_matricula = '2020-01-02 14:00:10'
+ where id = 4;
+ 
+
+insert into aluno (
+	id, 
+	nome, 
+	cpf, 
+	observacao, 
+	idade, 
+	dinheiro, 
+	altura, 
+	ativo, 
+	data_de_nascimento, 
+	hora_da_aula, 
+	data_matricula
+)
+values (
+	5, 
+	'Vinicius Dias', 
+	'12345678912', 
+	'Representante de turma, monitor na disciplina de Química e tem arritmia cardíaca.', 
+	23, 
+	987.00, 
+	1.85, 
+	true, 
+	'1997-09-06', 
+	'08:15:00', 
+	'2020-12-05 13:27:30');
+
+insert into aluno (
+	id, 
+	nome, 
+	cpf, 
+	observacao, 
+	idade, 
+	dinheiro, 
+	altura, 
+	ativo, 
+	data_de_nascimento, 
+	hora_da_aula, 
+	data_matricula
+)
+values (
+	6, 
+	'Martin', 
+	'45345678912', 
+	'jogador de futsal e xadrez', 
+	17, 
+	987.00, 
+	1.73, 
+	true, 
+	'2003-09-06', 
+	'08:15:00', 
+	'2020-12-05 13:27:30');
+
+
+
+-- atualiza registro na tabela
+update aluno
+	set cpf = 33333333333
+  where id = 2
+    and idade = 16;
+
+select * from aluno;
+
+-- seleciona todos os outros, menos o indicado
+ select *
+  from aluno
+ where nome <> "Diogo";
+ 
+ 
+ 
+ -- Ulilizando o % para filtrar resultados
+ select *
+   from aluno
+  where nome like '%i%a%'; 
+ -- retorna, por exemplo: Vinicius Dias, Nico Steppat.
+ -- Só importa a 2ª e a penúltima letra
+ 
+ 
+ select *
+   from aluno
+  where idade >= 35;
+ 
+ select *
+   from aluno
+  where idade between 20 and 30;
+  -- O between é inclusivo. Vai de fato considerar os
+  -- dois parâmetros
+  
+  select * from aluno where ativo = True;
+  
+  select * from aluno where ativo is null;
+  
+  
+-- excluindo um registro da tabela
+ select *
+   from aluno
+  where nome = 'Martin'
+  
+ delete 
+ 	from aluno
+   where nome = 'Martin';
+  
+-- usando alias  
+-- filtrando dados com o caracter % | uso de operadores lógicos
+  
+ select nome as lista_nomes,
+ 		idade
+   from aluno;
+  
+  select *
+    from aluno
+   where nome like 'D%'
+     and cpf is not null;
+  
+ select *
+   from aluno
+  where nome like 'Luan'
+     or nome like 'Vinicius'
+	 or nome like 'Nico%';
+
+ alter table aluno
+  add column avaliacao real;
+ 
+ select * from aluno; 
+ 
+ update aluno
+	set avaliacao = 7.90
+  where id = 1;
+  
+  update aluno
+	set avaliacao = 10
+  where id = 2;
+  
+  update aluno
+    set avaliacao = 8.15
+  where id = 3;
+  
+  update aluno
+	set avaliacao = 5.00
+  where id = 4;
+  
+  update aluno
+	set avaliacao = 3.75
+  where id = 5;
+  
+  update aluno
+	set avaliacao = 6.57
+  where id = 6;
+  
+ select * from aluno;
+
+ select aluno
+   from avaliacao
+  where nota_final >= 7
+    and faltas = 0;
+
+-- usando primary key
+create table curso (
+	id integer primary key,
+	nome varchar(255) not null
+);
+	 
+insert into curso (id, nome)
+values (1, 'HTML');
+
+insert into curso (id, nome)
+values (2, 'Javascript');
+
+-- usando foreign key
+drop table aluno;
+
+create table aluno (
+	id integer primary key,
+	nome varchar(255) not null
+);
+
+insert into aluno (id, nome)
+values (1, 'Diogo');
+
+insert into aluno (id, nome)
+values (2, 'Vinicius');
+
+create table aluno_curso (
+	aluno_id integer,
+	curso_id integer,
+	primary key (aluno_id, curso_id),
+	foreign key (aluno_id)
+	references aluno (id),
+	foreign key (curso_id)
+	references curso (id)
+);
+
+insert into aluno_curso (aluno_id, curso_id)
+values (1, 1);
+
+insert into aluno_curso (aluno_id, curso_id)
+values (2, 2);
+
+-- Selecionar todos os alunos e todos os cursos 
+-- na mesma query (INNER JOIN)
+select * 
+from aluno
+join aluno_curso on aluno_curso.aluno_id = aluno.id
+join curso on curso.id = aluno_curso.curso_id;
+-- mesmo resultado as duas formas
+select * 
+from aluno
+join aluno_curso on aluno_curso.aluno_id = aluno.id
+join curso on aluno_curso.curso_id = curso.id;
+
+-- retornar apenas o nome do aluno e o nome do curso 
+-- que ele faz 
+select aluno.nome as aluno,
+	   curso.nome as curso
+from aluno
+join aluno_curso on aluno_curso.aluno_id = aluno.id
+join curso on curso.id = aluno_curso.curso_id;
+
+
+
+--------------------------------------------------
+  -- EXEMPLO DE QUESTÃO ENTRE MÓDULOS
+  -- Selecione a alternativa que representa o script 
+  -- que deve ser implementado para mostrar as vagas 
+  -- com remuneração acima de 5000.
+  select *
+    from vagas
+   where remuneracao > 5000
+  order by remuneracao desc;
+ ---------------------------------------------------
+
+-- atividade 06:
+-- A gerente do RH te pediu um relatório com o
+-- nome de todos os funcionários e o nome dos 
+-- seus respectivos departamentos. As tabelas 
+-- seguem a seguinte estrutura:
+
+CREATE TABLE departamentos (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);	
+
+CREATE TABLE funcionarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    departamento_id INTEGER,
+    FOREIGN KEY (departamento_id) REFERENCES departamentos (id)
+);
+  
+-- resposta:
+select funcionarios.nome as funcionario,
+	   departamentos.nome as departamento
+from funcionarios
+join departamentos on funcionarios.departamento_id = departamentos.id;
+  
+insert into aluno (id, nome)
+values (3, 'Nico');
+
+insert into curso (id, nome)
+values (3, 'CSS');
+
+-- LEFT JOIN (tenho dado na tabela da esquerda,
+-- mas posso não ter na tabela da direita)
+	 select aluno.nome as aluno,
+	   	 curso.nome as curso
+	 from aluno
+left join aluno_curso on aluno_curso.aluno_id = aluno.id
+left join curso on curso.id = aluno_curso.curso_id;
+
+-- RIGHT JOIN (posso ter o dado na tabela
+-- da direita e não ter na esquerda)
+select aluno.nome as aluno,
+	   	 curso.nome as curso
+	 from aluno
+right join aluno_curso on aluno_curso.aluno_id = aluno.id
+right join curso on curso.id = aluno_curso.curso_id;
+
+-- FULL JOIN (traz os dados de todas as tabelas,
+-- mesmo que algum seja nulo)
+select aluno.nome as aluno,
+	   	 curso.nome as curso
+	 from aluno
+full join aluno_curso on aluno_curso.aluno_id = aluno.id
+full join curso on curso.id = aluno_curso.curso_id;
+
+-- CROSS JOIN (quero todos os dados da tabela
+-- aluno e todos os dados da tabela curso,
+-- sem passar pela tabela aluno_curso)
+select aluno.nome as aluno,
+	   	 curso.nome as curso
+	 from aluno
+cross join curso;
+
+insert into aluno (id, nome)
+values (4, 'Ben');
+
+-- DELETE CASCADE
+select * from aluno;
+select * from aluno_curso;
+select * from curso;
+
+drop table aluno_curso;
+
+create table aluno_curso (
+	aluno_id integer,
+	curso_id integer,
+	primary key (aluno_id, curso_id),
+	foreign key (aluno_id)
+	references aluno (id),
+	on delete cascade, -- se eu apagar um aluno matriculado em um curso, vai apagar ele na tabela aluno_curso também
+	on update cascade, -- se eu atualizar um aluno matriculado em um curso, vai atualizar na tabela aluno_curso também
+	foreign key (curso_id)
+	references curso (id)
+);
+
+select aluno.nome as aluno,
+	   aluno.id as id_do_aluno,
+	   curso.nome as curso,
+	   curso.id as id_do_curso
+from aluno
+join aluno_curso on aluno_curso.aluno_id = aluno.id
+join curso on curso.id = aluno_curso.curso_id;
+
+-- atividade 7
+-- Você está trabalhando em um projeto de 
+-- agenda telefônica, que existe com a 
+-- estrutura abaixo:
+CREATE TABLE pessoas (
+    id INTEGER PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE telefones (
+    id INTEGER PRIMARY KEY,
+    pessoa_id INTEGER,
+    numero VARCHAR(15) NOT NULL,
+    FOREIGN KEY (pessoa_id) REFERENCES pessoas (id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
+
+INSERT INTO pessoas (id, nome) VALUES (1,'Diogo');
+INSERT INTO telefones (id, pessoa_id, numero) VALUES (1,1,'(21) 98765-4321');
+
+UPDATE pessoas SET id = 2 WHERE nome = 'Diogo';
+DELETE FROM pessoas WHERE nome = 'Diogo';
+
+-- ordenando as consultas (ORDER BY)
+select * from aluno;
+
+select *
+from aluno
+order by nome;
+
+select *
+from aluno
+order by nome desc;
+
+select *
+from aluno
+order by nome, id desc;
+
+select *
+from aluno
+order by 2 asc, 1;  -- asc indica ordem crescente
+
+select aluno.nome as aluno,
+	   aluno.id as id_do_aluno,
+	   curso.nome as curso,
+	   curso.id as id_do_curso
+from aluno
+join aluno_curso on aluno_curso.aluno_id = aluno.id
+join curso on curso.id = aluno_curso.curso_id
+order by aluno.nome asc;
+
+-- OFFSET
+select *
+from aluno
+order by id
+limit 4
+offset 1; -- vai começar a contar a retornar resultado a partir do 2
+
+-- funções de agregação
+-- count
+-- sum
+-- max
+-- min
+-- avg
+
+select * from funcionarios;
+drop table funcionarios;
+
+create table funcionarios (
+	id serial primary key,
+	matricula varchar(50) not null,
+	nome varchar(200) not null,
+	sobrenome varchar(200) not null
+);
+
+insert into funcionarios (id, matricula, nome, sobrenome)
+values (1, 'M001', 'Diogo', 'Mascarenhas');
+
+insert into funcionarios (id, matricula, nome, sobrenome)
+values (2, 'M002', 'Vinicius', 'Dias');
+
+insert into funcionarios (id, matricula, nome, sobrenome)
+values (3, 'M003', 'Nico', 'Steppat');
+
+insert into funcionarios (id, matricula, nome, sobrenome)
+values (4, 'M004', 'João', 'Roberto');
+
+insert into funcionarios (id, matricula, nome, sobrenome)
+values (5, 'M005', 'Diogo', 'Mascarenhas');
+
+insert into funcionarios (id, matricula, nome, sobrenome)
+values (6, 'M001', 'Alberto', 'Martins');
+
+insert into funcionarios (id, matricula, nome, sobrenome)
+values (7, 'M001', 'Diogo', 'Oliveira');
+
+select count(id),  -- o count aceita * tbm
+sum(id),
+max(id),
+min(id),
+round(avg(id),2)  -- se fosse 0, traria arredondamento para zero
+from funcionarios;
+
+-- GROUP BY
+select curso.nome,
+count(aluno.id)
+from aluno
+join aluno_curso on aluno.id = aluno_curso.aluno_id
+join curso on curso.id = aluno_curso.curso_id
+group by 1
+order by 1
+
+-- filtros em consultas agrupadas
+
+select curso.nome,
+count(aluno.id)
+from curso
+left join aluno_curso on aluno_curso.curso_id = curso.id
+left join aluno on aluno.id = aluno_curso.aluno_id
+group by 1
+
+select curso.nome,
+count(aluno.id)
+from curso
+left join aluno_curso on aluno_curso.curso_id = curso.id
+left join aluno on aluno.id = aluno_curso.aluno_id
+group by 1
+having count(aluno.id) = 0
+
+select curso.nome,
+count(aluno.id)
+from curso
+left join aluno_curso on aluno_curso.curso_id = curso.id
+left join aluno on aluno.id = aluno_curso.aluno_id
+group by 1
+having count(aluno.id) > 0
+
+select nome,
+count(id)
+from funcionarios
+group by nome
+having count(id) > 1;
+
+
+  
+  
+  
+  
+   
