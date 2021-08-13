@@ -78,9 +78,9 @@ VamoAI! 📚
 ---
 
 ## Projetos
-### Módulo 1: ![Jogo Mortal Queen](https://github.com/michelle-lira/jogoResilia)
-### Módulo 2: ![Consumindo a API Marvel](https://github.com/michelle-lira/API_Marvel)
-### Módulo 3: ![Criando um dashboard com dados da Steam](https://github.com/michelle-lira/projeto_modulo3_steam)
-### Módulo 4: ![Storytelling com Dados](https://github.com/michelle-lira/projeto_mod4_vamo-ai/blob/main/README.md)
-### Módulo 5: ![Data Reporting | Talk is cheap. Show me the data!](https://github.com/michelle-lira/projeto_mod_05_vamoai)
+### Módulo 1: [Jogo Mortal Queen](https://github.com/michelle-lira/jogoResilia)
+### Módulo 2: [Consumindo a API Marvel](https://github.com/michelle-lira/API_Marvel)
+### Módulo 3: [Criando um dashboard com dados da Steam](https://github.com/michelle-lira/projeto_modulo3_steam)
+### Módulo 4: [Storytelling com Dados](https://github.com/michelle-lira/projeto_mod4_vamo-ai/blob/main/README.md)
+### Módulo 5: [Data Reporting | Talk is cheap. Show me the data!](https://github.com/michelle-lira/projeto_mod_05_vamoai)
 
